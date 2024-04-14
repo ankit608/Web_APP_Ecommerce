@@ -18,7 +18,7 @@ const user = require("../model/user");
 
 
 
-router.post("/create-user", (req, res, next) => { console.log(req.body, "nbhsjgjjs"); next() }, upload.single("file"), async (req, res, next) => {
+router.post("/create-user", upload.single("file"), async (req, res, next) => {
     try {
 
         const { Name, email, password } = req.body;
@@ -174,15 +174,17 @@ router.post("/login-user", async (req, res, next) => {
       
 
     const { email, password } = req.body;
+    console.log(email,password);
 
     if (!email || !password) {
         return next(new ErrorHandler("Please Provide all the fields"))
     }
 
-    const user2 = await user1.findOne({ email }).select("+password");
+    const user2 = await user1.findOne({ email:email }).select("+password");
+
 
     if (!user2) {
-        return next(new ErrorHandler("user does not exist Please Sign In", 400))
+        return next(new ErrorHandler("user does not exist Please Sign In hello", 400))
     }
 
     const isPasswordValid = await user2.comparePassword(password)

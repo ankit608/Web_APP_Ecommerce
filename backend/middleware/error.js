@@ -1,6 +1,6 @@
 const ErrorHandler = require("../utils/errorHandlers")
  module.exports = (err,request,response,next) =>{
-  console.log("inside the function")
+  console.log("inside the function..")
   err.statusCode = err.statusCode|| 500
     err.message = err.message || "Internal server Error"
     if(err.name=== "CasteError"){

@@ -21,6 +21,7 @@ function BestDeals() {
         <div className='grid grid-cols-1 gap-[5px] md:grid-cols-2 md:gap-10 lg:grid-cols-4 xl:grid-cols-5 xl:gap-[30px]'>
             {
                 Data && Data.map((i,index)=>{
+                    console.log(i,"productInfo")
                  return   <ProductCard data={i} key={index}></ProductCard>
                 })
             }

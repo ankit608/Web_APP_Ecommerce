@@ -32,6 +32,7 @@ export const Login = () => {
          
       toast.success("Login Successful")
        navigate("/")
+     
        
     }).catch((err)=>{
         console.log(err,"error")
@@ -86,12 +87,12 @@ export const Login = () => {
                   }
          
                     </div>
-                   <div className={`${style.normalFlex} justify-between `  }>
-                    <div className={`${style.normalFlex}`}>
+                   <div className={`${style.noramlFlex} justify-between `  }>
+                    <div className={`${style.noramlFlex}`}>
                        
                         <input style={{ color: "rgb(37,99, 235)"}}type='checkbox' name="remember-me" id="remember-me" className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"></input>
                           <label htmlFor='remember-me' className='ml-2 block text-sm text-gray-900'>
-                            Remenber me
+                            Remember me
                           </label>
                     </div>
                     <div className='text-sm'>

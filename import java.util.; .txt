@@ -1,0 +1,39 @@
+import java.util.*; 
+import java.io.*;
+
+class Main {
+
+  public static String StringChallenge(String str) {
+     int max = Integer.MIN_VALUE;
+    
+      
+    for(int i = 0 ; i< str.length();i++){
+        char a = str.charAt(i);
+
+        for(int j =0 ; j<str.length();j++){
+          if(str.charAt(j)==a){
+            Set<Character> s = new HashSet<Character>();
+              for(int p = i+1 ; p<j;p++){
+               
+                s.add(str.charAt(p));
+               
+                 
+              }
+               if(s.size()>=max){
+                  max = s.size();
+                }
+             
+          }
+        }
+
+    }
+    return Integer.toString(max);
+  }
+
+  public static void main (String[] args) {  
+    // keep this function call here     
+    Scanner s = new Scanner(System.in);
+    System.out.print(StringChallenge(s.nextLine())); 
+  }
+
+}

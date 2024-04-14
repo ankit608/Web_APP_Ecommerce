@@ -20,8 +20,8 @@ export const navItems = [
 
     {
 
-        title:"Evets",
-        url: "/evenst"
+        title:"Events",
+        url: "/events"
     },
 
 
@@ -215,7 +215,7 @@ export const brandingData = [
     },
     {
       id: 3,
-      title: "Accesories",
+      title: "Accesories and tools",
       subTitle: "",
       image_Url:
         "https://img.freepik.com/free-vector/ordering-goods-online-internet-store-online-shopping-niche-e-commerce-website-mother-buying-babies-clothes-footwear-toys-infant-accessories_335657-2345.jpg?w=2000",

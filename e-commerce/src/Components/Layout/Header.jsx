@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import style from '../../styles/styles'
 import { Link } from 'react-router-dom'
 import { categoriesData, productData } from "../../static/static.js"
@@ -8,14 +8,21 @@ import { BiMenuAltLeft } from 'react-icons/bi'
 import DropDown1 from "./DropDown.jsx"
 import { Navbar } from './Navbar.jsx'
 import{CgProfile} from "react-icons/cg"
+import { UserData } from '../../context.js/contextApi.js'
+import Cart from '../cart/Cart.jsx'
+import WishList1 from "../WishList/WishList.jsx"
 const Header = ({ activeHeading, setOption }) => {
-    console.log(activeHeading, "activeHeading")
+  
+  const {state} = useContext(UserData)
+  console.log( "Authenticated..header")
+  const [OpenCart,setOpenCart] = useState(false);
     const [searchTerm, setSearchTerm] = useState("")
+    const [WishList,setWishList] = useState(false);
     const [searchData, setSearchData] = useState(null);
     const [active, setActive] = useState(false)
     const [DropDown, setDropDown] = useState(false);
     window.addEventListener("scroll", () => {
-        if (window.screen > 70) {
+        if (window.scrollY > 70) {
             setActive(true)
 
         } else {
@@ -53,7 +60,7 @@ const Header = ({ activeHeading, setOption }) => {
                         <AiOutlineSearch size={30} className='absolute right-2 top-1.5 cursor-pointer'></AiOutlineSearch>
                         {
                             searchData && searchData.length !== 0 ? (
-                                <div className='absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4'>
+                                <div className='absolute min-h-[30vh] w-full bg-slate-50 shadow-sm z-[9] p-4'>
                                     {searchData && searchData.map((i, index) => {
                                         const d = i.name
                                         const Product_name = d.replace(/\s+/g, "_")
@@ -82,7 +89,7 @@ const Header = ({ activeHeading, setOption }) => {
                 </div>
 
             </div>
-            <div className={`${active === true ? "shadow-sm fixed top-0;left-0 ;z-10" : null} transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}>
+            <div className={`${active === true ? "shadow-sm fixed top-0 left-0  z-10" : null} transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}>
                 <div className={`${style.section} relative ${style.noramlFlex} justify-between `}>
                     {/*categories*/}
 
@@ -95,14 +102,14 @@ const Header = ({ activeHeading, setOption }) => {
 
                         </IoIosArrowDown>
                         {DropDown ? <DropDown1 categoriesData={categoriesData} setDropDown={setDropDown}></DropDown1> : null}
-
+                        
                     </div>
                     <div className={`${style.noramlFlex}`}>
                         <Navbar active={activeHeading} setOption={setOption}></Navbar>
                     </div>
                     <div>
                         <div className={`${style.noramlFlex}`}>
-                            <div className="relative cursor-pointer mr-[15px]">
+                            <div className="relative cursor-pointer mr-[15px]" onClick={()=>{setWishList(true)}}>
                                 <AiOutlineHeart size={30} color='rgb(255 255 255/83%'>
 
                                 </AiOutlineHeart>
@@ -111,7 +118,7 @@ const Header = ({ activeHeading, setOption }) => {
                                 </span>
                             </div>
                            
-                            <div className="relative cursor-pointer mr-[15px]">
+                            <div className="relative cursor-pointer mr-[15px]" onClick={()=>{setOpenCart(true)}}>
                                 <AiOutlineShoppingCart size={30} color='rgb(255 255 255/83%'>
 
                                 </AiOutlineShoppingCart>
@@ -121,13 +128,24 @@ const Header = ({ activeHeading, setOption }) => {
                             </div>
                            
                             <div className="relative cursor-pointer mr-[15px]">
+                                  {state.Authenticated?<Link  to = "/profile">
+                                     <img src = {`${state.user.user3.avatar.url}`}></img>
+
+                               </Link>:
                                <Link  to = "/login">
                                <CgProfile size={30} color='rgb(255 255 255/83%'></CgProfile>
 
-                               </Link>
+                               </Link>}
+                               
                                 
                             </div>
                         </div>
+                        {// {Cart Popup}
+                            OpenCart? <Cart setOpenCart={setOpenCart}></Cart>: null
+                        }
+                          {// {WhisList Popup}
+                            WishList? <WishList1 setWishList = {setWishList} ></WishList1>: null
+                        }
                     </div>
 
                 </div>
